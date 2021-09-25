@@ -23,10 +23,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
         
-        // Set the scene to the view
-        sceneView.scene = scene
+        // Create node
+        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+            
+            // Set node position
+            diceNode.position = SCNVector3(0, 0, -0.1)
+            
+            //
+            sceneView.scene.rootNode.addChildNode(diceNode)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
