@@ -101,6 +101,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Position node
             planeNode.position = SCNVector3(planeAnchor.center.y, 0, planeAnchor.center.z)
             
+            // Transform plane node
+            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
+            
+            // Create material object
+            let gridMaterial = SCNMaterial()
+            
+            // Set object material
+            gridMaterial.diffuse.contents = UIImage(named: <#T##String#>)
+            
+            // Set node geommetry
+            planeNode.geometry = plane
+            
         } else {
             return
         }
