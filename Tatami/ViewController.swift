@@ -85,6 +85,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if let touch = touches.first {
+            
+            // 2D touch coordinate
+            let touchLocation = touch.location(in: sceneView)
+            
+            // Convert 2D location to position in 3D space
+            let results = sceneView.hitTest(touchLocation)
+            
+            if let hitResult = results.first {
+                print(hitResult)
+            }
+            
+        }
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // This code is triggered when a horizontal plane is detected
         
@@ -108,10 +125,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let gridMaterial = SCNMaterial()
             
             // Set object material
-            gridMaterial.diffuse.contents = UIImage(named: <#T##String#>)
+            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
             
             // Set node geommetry
             planeNode.geometry = plane
+            
+            // Add node to scene
+            node.addChildNode(planeNode)
             
         } else {
             return
