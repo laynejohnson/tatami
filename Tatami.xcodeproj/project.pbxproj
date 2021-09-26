@@ -80,6 +80,7 @@
 				E8340A2326FFA5F300ECE5E5 /* Sources */,
 				E8340A2426FFA5F300ECE5E5 /* Frameworks */,
 				E8340A2526FFA5F300ECE5E5 /* Resources */,
+				E8F283DB2700D28000E1A4AB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -136,6 +137,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E8F283DB2700D28000E1A4AB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nxattr -cr ~/Library/Developer/Xcode/DerivedData || echo Clear\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E8340A2326FFA5F300ECE5E5 /* Sources */ = {
