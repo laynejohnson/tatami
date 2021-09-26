@@ -10,7 +10,7 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
@@ -24,19 +24,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-//        // Create a new scene
-//        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
-//
-//        // Create node
-//        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
-//
-//            // Set node position
-//            diceNode.position = SCNVector3(0, 0, -0.1)
-//
-//            // Add node to scene
-//            sceneView.scene.rootNode.addChildNode(diceNode)
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Enable horizontal plane detection
         configuration.planeDetection = .horizontal
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -58,17 +45,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
-
+    
     // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
+    /*
+     // Override to create and configure nodes for anchors added to the view's session.
+     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+     let node = SCNNode()
      
-        return node
-    }
-*/
+     return node
+     }
+     */
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -93,12 +80,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let touchLocation = touch.location(in: sceneView)
             
             // Convert 2D location to position in 3D space
-            let results = sceneView.hitTest(touchLocation)
-            
-            if let hitResult = results.first {
-                print(hitResult)
+            guard let query = sceneView.raycastQuery(from: touchLocation, allowing: .existingPlaneInfinite, alignment: .any) else {
+                return
             }
             
+            let results = sceneView.session.raycast(query)
+    
+            if let hitResult = results.first {
+                
+                // Create a new scene
+                let diceScene = SCNScene(named: "art.scnassets/Dice Model/diceCollada.scn")!
+
+                // Create node
+                if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+
+                    // Set node position in 3D space
+                    diceNode.position = SCNVector3(x: hitResult.worldTransform.columns.3.x, y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius, z: hitResult.worldTransform.columns.3.z)
+
+                    // Add node to scene
+                    sceneView.scene.rootNode.addChildNode(diceNode)
+                    
+                    // Animate dice
+                    let randomX = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
+                    let randomZ = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
+                    
+                    diceNode.runAction(SCNAction.rotateBy(x: CGFloat(randomX), y: 0, z: CGFloat(randomZ), duration: 0.5))
+                }
+            }
         }
     }
     
@@ -138,3 +146,4 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 }
+
