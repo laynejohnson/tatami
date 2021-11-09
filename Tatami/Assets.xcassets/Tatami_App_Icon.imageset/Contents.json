@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Tatami_App_Icon.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -171,7 +171,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         duration: 0.5)
         )
         
-        // TODO: Add haptic feedback on dice roll.
+        // TODO: Add haptic feedback on dice roll. Create haptic engine.
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
