@@ -9,6 +9,8 @@ import UIKit
 import SceneKit
 import ARKit
 
+// TODO: AddARCoachingOverlayView
+
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     var diceArray = [SCNNode]()
@@ -36,14 +38,37 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration.
-        let configuration = ARWorldTrackingConfiguration()
-        
-        // Enable horizontal plane detection.
-        configuration.planeDetection = .horizontal
-        
-        // Run the view's session.
-        sceneView.session.run(configuration)
+        // Verify device support.
+        if ARConfiguration.isSupported {
+            
+            print("Success! ARKit is supported on this device.")
+            
+            // Create a session configuration.
+            let configuration = ARWorldTrackingConfiguration()
+            
+            // Enable horizontal plane detection.
+            configuration.planeDetection = .horizontal
+            
+            // Run the view's session.
+            sceneView.session.run(configuration)
+            
+        } else {
+            
+            print("Sorry :( This experience is not supported on this device.")
+            
+            // Configure alert.
+            let alert = UIAlertController(title: "Sorry! 😕", message: " Tatami AR is not supported on this device.", preferredStyle: .alert)
+            
+            // Configure alert action.
+            let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            // Add action to alert.
+            alert.addAction(action)
+            
+            // Present alert to user.
+            present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -145,6 +170,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         z: CGFloat(randomZ),
                         duration: 0.5)
         )
+        
+        // TODO: Add haptic feedback on dice roll.
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
@@ -179,7 +206,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Transform plane node.
             planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
             
-             // TODO: Replace material with 3D tatami model.
+            // TODO: Replace material with 3D tatami model.
             
             // Create material object.
             let gridMaterial = SCNMaterial()
