@@ -13,7 +13,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var diceArray = [SCNNode]()
     
+    // MARK: - IBOutlets
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+    // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +62,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
      return node
      }
      */
+    
+    // MARK: - ARSession
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user.
@@ -118,6 +124,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    // MARK: - Dice Functions
+    
     func rollAll() {
         for dice in diceArray {
             roll(dice: dice)
@@ -148,6 +156,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             dice.removeFromParentNode()
         }
     }
+    
+    // MARK: - SCNSceneRenderer
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // This code is triggered when a horizontal plane is detected.
@@ -184,6 +194,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return
         }
     }
+    
+    // MARK: - IBActions
     
     @IBAction func replay(_ sender: UIBarButtonItem) {
         removeAllDice()
