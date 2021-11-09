@@ -23,13 +23,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         // Show plane detection feature points.
-//        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        //        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         
         // Set the view's delegate.
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information.
         sceneView.showsStatistics = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,15 +94,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             let results = sceneView.session.raycast(query)
-    
+            
             if let hitResult = results.first {
                 
                 // Create a new scene.
                 let diceScene = SCNScene(named: "art.scnassets/Dice Model/diceCollada.scn")!
-
+                
                 // Create node.
                 if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
-
+                    
                     // Set node position in 3D space.
                     diceNode.position = SCNVector3(
                         x: hitResult.worldTransform.columns.3.x,
@@ -111,7 +112,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     
                     // Add dice nodes to dice array.
                     diceArray.append(diceNode)
-
+                    
                     // Add node to scene.
                     sceneView.scene.rootNode.addChildNode(diceNode)
                     
@@ -181,8 +182,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Create material object.
             let gridMaterial = SCNMaterial()
             
-            // Set object material.
-            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
+            // Define material contents.
+            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/tatami.jpeg")
+            
+            // Add materials to plane.
+            plane.materials = [gridMaterial]
             
             // Set node geometry
             planeNode.geometry = plane
