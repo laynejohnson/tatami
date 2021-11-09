@@ -23,7 +23,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         // Show plane detection feature points.
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+//        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         
         // Set the view's delegate.
         sceneView.delegate = self
@@ -157,7 +157,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    // MARK: - SCNSceneRenderer
+    // MARK: - SCNSceneRenderer Plane Detection
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // This code is triggered when a horizontal plane is detected.
