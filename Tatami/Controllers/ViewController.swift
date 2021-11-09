@@ -179,11 +179,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Transform plane node.
             planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
             
+             // TODO: Replace material with 3D tatami model.
+            
             // Create material object.
             let gridMaterial = SCNMaterial()
             
+            // Tatami mat images.
+            let tatamiMat = UIImage(named: "art.scnassets/Materials/tatami_mat.jpg")
+            let tatamiImagePlaceholder = UIImage(named: "art.scnassets/Materials/tatami_border.jpeg")
+            
             // Define material contents.
-            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/tatami.jpeg")
+            if tatamiMat != nil {
+                gridMaterial.diffuse.contents = tatamiMat
+            } else {
+                gridMaterial.diffuse.contents = tatamiImagePlaceholder
+            }
             
             // Add materials to plane.
             plane.materials = [gridMaterial]

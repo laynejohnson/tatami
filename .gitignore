@@ -131,3 +131,7 @@ Dependencies/
  !*.xcodeproj/xcshareddata/
  !*.xcworkspace/contents.xcworkspacedata
  **/xcshareddata/WorkspaceSettings.xcsettings
+
+### Tatami Images ###
+
+tatami_mat.jpg
