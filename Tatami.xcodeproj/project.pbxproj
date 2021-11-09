@@ -59,15 +59,39 @@
 		E8340A2926FFA5F300ECE5E5 /* Tatami */ = {
 			isa = PBXGroup;
 			children = (
+				E851A933273A947B00C22AAC /* Models */,
+				E851A934273A948200C22AAC /* Views */,
+				E851A935273A948700C22AAC /* Controllers */,
 				E8340A2A26FFA5F300ECE5E5 /* AppDelegate.swift */,
-				E8340A3526FFA5FD00ECE5E5 /* LaunchScreen.storyboard */,
-				E8340A3026FFA5F300ECE5E5 /* Main.storyboard */,
-				E8340A2E26FFA5F300ECE5E5 /* ViewController.swift */,
 				E8340A2C26FFA5F300ECE5E5 /* art.scnassets */,
 				E8340A3326FFA5FD00ECE5E5 /* Assets.xcassets */,
 				E8340A3826FFA5FD00ECE5E5 /* Info.plist */,
 			);
 			path = Tatami;
+			sourceTree = "<group>";
+		};
+		E851A933273A947B00C22AAC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E851A934273A948200C22AAC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8340A3026FFA5F300ECE5E5 /* Main.storyboard */,
+				E8340A3526FFA5FD00ECE5E5 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E851A935273A948700C22AAC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E8340A2E26FFA5F300ECE5E5 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

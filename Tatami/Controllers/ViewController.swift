@@ -18,33 +18,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Show plane detection feature points
+        // Show plane detection feature points.
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         
-        // Set the view's delegate
+        // Set the view's delegate.
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
+        // Show statistics such as fps and timing information.
         sceneView.showsStatistics = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
+        // Create a session configuration.
         let configuration = ARWorldTrackingConfiguration()
         
-        // Enable horizontal plane detection
+        // Enable horizontal plane detection.
         configuration.planeDetection = .horizontal
         
-        // Run the view's session
+        // Run the view's session.
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
+        // Pause the view's session.
         sceneView.session.pause()
     }
     
@@ -60,17 +60,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
      */
     
     func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
+        // Present an error message to the user.
         
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay.
         
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        // Reset tracking and/or remove existing anchors if consistent tracking is required.
         
     }
     
@@ -78,10 +78,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         if let touch = touches.first {
             
-            // 2D touch coordinate
+            // 2D touch coordinate.
             let touchLocation = touch.location(in: sceneView)
             
-            // Convert 2D location to position in 3D space
+            // Convert 2D location to position in 3D space.
             guard let query = sceneView.raycastQuery(from: touchLocation, allowing: .existingPlaneInfinite, alignment: .any) else {
                 return
             }
@@ -90,26 +90,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
             if let hitResult = results.first {
                 
-                // Create a new scene
+                // Create a new scene.
                 let diceScene = SCNScene(named: "art.scnassets/Dice Model/diceCollada.scn")!
 
-                // Create node
+                // Create node.
                 if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
 
-                    // Set node position in 3D space
+                    // Set node position in 3D space.
                     diceNode.position = SCNVector3(
                         x: hitResult.worldTransform.columns.3.x,
                         y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius * 3,
                         z: hitResult.worldTransform.columns.3.z
                     )
                     
-                    // Add dice nodes to dice array
+                    // Add dice nodes to dice array.
                     diceArray.append(diceNode)
 
-                    // Add node to scene
+                    // Add node to scene.
                     sceneView.scene.rootNode.addChildNode(diceNode)
                     
-                    // Automatically adjust lighting in scene
+                    // Automatically adjust lighting in scene.
                     sceneView.automaticallyUpdatesLighting = true
                     
                     roll(dice: diceNode)
@@ -125,7 +125,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func roll(dice: SCNNode) {
-        // Animate dice
+        
+        // Animate dice.
         let randomX = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
         let randomZ = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
         
@@ -149,31 +150,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        // This code is triggered when a horizontal plane is detected
+        // This code is triggered when a horizontal plane is detected.
         
         if anchor is ARPlaneAnchor {
             
             let planeAnchor = anchor as! ARPlaneAnchor
             
-            // Convert the dimensions of anchor into scene plane
+            // Convert the dimensions of anchor into scene plane.
             let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
             
-            // Create plane node
+            // Create plane node.
             let planeNode = SCNNode()
             
-            // Position node
+            // Position node.
             planeNode.position = SCNVector3(planeAnchor.center.y, 0, planeAnchor.center.z)
             
-            // Transform plane node
+            // Transform plane node.
             planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
             
-            // Create material object
+            // Create material object.
             let gridMaterial = SCNMaterial()
             
-            // Set object material
+            // Set object material.
             gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
             
-            // Set node geommetry
+            // Set node geometry
             planeNode.geometry = plane
             
             // Add node to scene
