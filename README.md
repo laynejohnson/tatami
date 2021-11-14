@@ -9,7 +9,7 @@
 
 #### **Device Requirements :**
 
-- iOS device with A9 processor or later
-- iOS 11.0 or later
+- iOS device with A9 processor or later.
+- iOS 11.0 or later.
 
 ** XCode simulator does not support ARKit app preview.
