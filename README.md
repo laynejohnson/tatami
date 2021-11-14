@@ -1,4 +1,4 @@
-# Tatami Dice AR
+# Tatami AR
 
 #### Augmented reality dice game.
 
