@@ -7,7 +7,7 @@
 ### **🎲 To Run App :** 
 - `xed.` in Terminal to open app in XCode.
 
-#### ****Device Requirements :**
+#### **Device Requirements :**
 
 - iOS device with A9 processor or later
 - iOS 11.0 or later
