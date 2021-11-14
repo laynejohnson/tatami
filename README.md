@@ -7,9 +7,9 @@
 ### **🎲 To Run App :** 
 - `xed.` in Terminal to open app in XCode.
 
-### **Device Requirments :**
+### **Device Requirements :**
 
-- Physical iOS device with A9 processor (or later)
-- >= iOS 11
+- iOS device with A9 processor or later
+- iOS 11.0 or later
 
 ** XCode simulator does not support ARKit app preview.
